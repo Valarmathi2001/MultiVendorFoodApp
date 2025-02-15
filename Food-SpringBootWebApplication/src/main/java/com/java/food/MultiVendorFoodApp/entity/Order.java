@@ -1,6 +1,9 @@
 package com.java.food.MultiVendorFoodApp.entity;
 
 import java.util.List;
+import java.util.Map;
+
+import com.java.food.MultiVendorFoodApp.Enum.OrderStatus;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -14,30 +17,36 @@ public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Order_Id")
-	@NotNull(message = "Order ID cannot be Empty!!")
 	private Long orderId;
 	
 	@NotNull(message = "Price cannot be Empty!!")
-	@Column(name = "Price")
-	private int price;
+	@Column(name = "TotalAmount")
+	private int totalAmount;
 	
-	@NotNull(message = "Quantity cannot be Empty!!")
-	@Column(name = "Quantity")
-	private int quantity;
+	
 	
 	@NotNull(message = "Status cannot be Empty!!")
 	@Column(name = "Status")
-	private String status;
+	private OrderStatus status;
 	
 	
 	
-	@NotNull(message = "User cannot be Empty!!")
+	
 	@ManyToOne
 	private User user;
 	
-	@NotNull(message = "Food cannot be Empty!!")
-	@OneToMany(mappedBy = "order")
-	private List<Food> food;
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<OrderItems> orderItems;
 	
+	@Override
+	public String toString() {
+	    return "Order{" +
+	           "id=" + orderId +
+	          
+	           '}'; // Exclude `user`
+	}
+	
+	
+
 
 }

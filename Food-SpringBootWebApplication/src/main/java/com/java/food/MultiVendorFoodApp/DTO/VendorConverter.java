@@ -12,7 +12,7 @@ public class VendorConverter {
 		Vendor vendor = new Vendor();
 		vendor.setVendorName(vendorDTO.getVendorName());
 		vendor.setEmail(vendorDTO.getEmailId());
-		vendor.setShops(ShopConvertor.convertToEntity(vendorDTO.getShopDTO()));
+		vendor.setShops(ShopConvertor.convertToEntitys(vendorDTO.getShopDTO()));
 		vendor.setMobileNumber(vendorDTO.getMobileNumber());
 		vendor.setPassword(vendorDTO.getPassword());
 		return vendor;
@@ -20,6 +20,6 @@ public class VendorConverter {
 	
 	public static VendorDTO toDTO(Vendor vendor)
 	{
-		return new VendorDTO(vendor.getVendorName(),vendor.getEmail(),vendor.getPassword(),vendor.getMobileNumber(),ShopConvertor.converToDTO(vendor.getShops()));
+		return new VendorDTO(vendor.getVendorName(),vendor.getEmail(),vendor.getPassword(),vendor.getMobileNumber(),ShopConvertor.converToDTOs(vendor.getShops()));
 	}
 }

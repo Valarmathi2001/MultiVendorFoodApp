@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.java.food.MultiVendorFoodApp.DTO.FoodDTO;
 import com.java.food.MultiVendorFoodApp.DTO.ShopConvertor;
 import com.java.food.MultiVendorFoodApp.DTO.ShopDTO;
+import com.java.food.MultiVendorFoodApp.Projection.FoodProjection;
+import com.java.food.MultiVendorFoodApp.Projection.ShopProjection;
 import com.java.food.MultiVendorFoodApp.entity.Food;
 import com.java.food.MultiVendorFoodApp.entity.Shop;
 import com.java.food.MultiVendorFoodApp.exception.SerachNotFoundException;
@@ -25,30 +27,34 @@ public class SearchServiceImpl implements SearchService {
 	@Autowired
 	ShopRepository shopRepository;
 	
-	public Optional<Food> searchFoodByID(Long id) {
-		return foodRepository.findById(id);
+	public FoodProjection searchFoodByID(Long id) {
+		return foodRepository.findFoodById(id);
 	}
 	
-	public List<Food> searchFoodByName(String foodName, String shopName) {
+	public List<FoodProjection> searchFoodByNameWithShopName(String foodName, String shopName) {
 		return foodRepository.findByNameIgnoreCaseContaining(foodName,shopName);
 	}
 	
-	public ShopDTO searchShopByID(Integer id) {
-		Optional<Shop> shop = shopRepository.findById(id);
-		return (ShopDTO) ShopConvertor.converToDTO(Collections.singletonList(shop.orElseThrow(()-> new SerachNotFoundException("Search Not found"))));
+	public ShopProjection searchShopByID(Integer id) {
+		ShopProjection shop = shopRepository.findShopById(id);
+		return shop;
 	}
 	
-	public List<ShopDTO> searchShopByName(String shopName) {
-		List<Shop> shops = shopRepository.findAllByShopName(shopName);
-		return ShopConvertor.converToDTO(shops);
+	public List<ShopProjection> searchShopByName(String shopName) {
+		List<ShopProjection> shops = shopRepository.findAllByShopName(shopName);
+		return shops;
 		
 		
 	}
 	
-	public List<FoodDTO> searchFoodByNameWithShopName(String foodName, String shopName){
-		return foodRepository.findByNameIgnoreCaseContaining(foodName,shopName);
+	public List<FoodProjection> searchFoodByName(String foodName){
+		return foodRepository.findAllByName(foodName);
 		
 	}
+	
+	
+
+	
 	
 	
 	

@@ -14,11 +14,14 @@ public class AddFoodItemController {
 	@Autowired
 	AddFoodItemService addFoodItemService;
 	
-	@PostMapping("Add/Food")
+	@PostMapping("Add/Food/Shop")
 	public String addFoodToShop(String foodName, int price, String Description, String shopName) {
 		return addFoodItemService.addFoodToShop(foodName,price,Description,shopName);
 	}
 	
-	
+	@PostMapping("Add/Food/Cart")
+	public String addFoodToCart(String foodName,String shopName, String userName,int quantity) {
+		return addFoodItemService.addFoodToCart(foodName, shopName,  userName, quantity);
+	}
 
 }

@@ -12,8 +12,6 @@ import lombok.Data;
 @Entity
 @Table(name = "Food_Table")
 @Data
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "foodId")
-
 public class Food {
 	@Id
 	@GeneratedValue(strategy =GenerationType.IDENTITY)
@@ -31,7 +29,6 @@ public class Food {
 	
 	private String Description;
 	
-	@ManyToOne
-	private Order order;
 
+	
 }

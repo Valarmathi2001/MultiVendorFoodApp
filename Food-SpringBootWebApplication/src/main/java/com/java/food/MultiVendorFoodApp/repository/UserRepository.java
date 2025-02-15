@@ -12,6 +12,7 @@ import com.java.food.MultiVendorFoodApp.entity.User;
 public interface UserRepository extends JpaRepository<User,Long> {
 	Optional<User> findByEmailIdAndPassword(String emailId, String password);
 	Optional<User> findByEmailId(String emailId);
+	Optional<User> findByUserName(String name);
 	
 
 }

@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.java.food.MultiVendorFoodApp.DTO.FoodDTO;
 import com.java.food.MultiVendorFoodApp.DTO.ShopDTO;
+import com.java.food.MultiVendorFoodApp.Projection.FoodProjection;
+import com.java.food.MultiVendorFoodApp.Projection.ShopProjection;
 import com.java.food.MultiVendorFoodApp.entity.Food;
 import com.java.food.MultiVendorFoodApp.entity.Shop;
 import com.java.food.MultiVendorFoodApp.service.SearchService;
@@ -22,28 +25,28 @@ public class SearchController {
 	SearchService searchService;
 	
 	@GetMapping("search/Food/Id")
-	public Optional<Food> searchFoodByID(Long id) {
+	public FoodProjection searchFoodByID(Long id) {
 		return searchService.searchFoodByID(id);
 	}
 	
 	@GetMapping("search/{shopName}/Food/Name")
-	public List<Food> searchFoodByName(String foodName, @PathVariable String shopName) {
+	public List<FoodProjection> searchFoodByName(String foodName, @PathVariable String shopName) {
 		return searchService.searchFoodByNameWithShopName(foodName, shopName);
 	}
 	
 	@GetMapping("search/Food/Name")
-	public List<Food> searchFoodByNameInAllShop(String foodName) {
+	public List<FoodProjection> searchFoodByNameInAllShop(String foodName) {
 		return searchService.searchFoodByName(foodName);
 	}
 	
 	
 	@GetMapping("search/Shop/Id")
-	public ShopDTO searchShopByID(Integer id) {
+	public ShopProjection searchShopByID(Integer id) {
 		return searchService.searchShopByID(id);
 	}
 	
 	@GetMapping("search/Shop/Name")
-	public List<ShopDTO> searchShopByName(String shopName) {
+	public List<ShopProjection> searchShopByName(String shopName) {
 		return searchService.searchShopByName(shopName);
 	}
 

@@ -25,6 +25,9 @@ public class Shop {
 	@Column(name = "ShopName")
 	private String shopName;
 	
+	@Column(name = "Description")
+	private String description;
+	
 	@OneToMany(mappedBy = "shop")
 	private List<Food> foodItems;
 	

@@ -9,6 +9,7 @@ import lombok.*;
 @Entity
 @Table(name = "User_Table")
 @Data
+@ToString(exclude = {"user", "orders", "cartItems"})
 public class User {
 	
 	@Id
@@ -39,6 +40,20 @@ public class User {
 	@NotNull(message = "Mobile Number cannot be Empty!!")
 	@Column(name = "MobileNumber")
 	private String mobileNumber;
+	
+	
+	@OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
+	@JoinColumn(name = "Cart_id")
+	private Cart cart;
+	
+	@Override
+	public String toString() {
+	    return "User{" +
+	           "id=" + userId +
+	         
+	           '}'; // Exclude `orders` or `cart`
+	}
+
 	
 
 }
